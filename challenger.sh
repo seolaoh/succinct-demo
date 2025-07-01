@@ -266,7 +266,7 @@ wait_for_game_transactions() {
             log_success "Proposer $msg the game: $blockscout_address/tx/$tx_hash"
 
             if [ "$tx_count" -ge "$required_tx_num" ]; then
-              log_success "Game $game_address has been resolved as DEFENDER_WINS and the proposer has been rewarded!"
+              log_success "Game $game_address has been resolved as DEFENDER_WINS!"
               return 0
             fi
           fi
@@ -296,7 +296,7 @@ challenge_game() {
     log_success "Successfully challenged game: $blockscout_address/tx/$tx_hash"
 
     # Wait for 3 more transactions to be submitted to this game (excluding the challenge tx)
-    wait_for_game_transactions "$rpc_url" "$game_address" "$blockscout_address" 3 "$tx_hash"
+    wait_for_game_transactions "$rpc_url" "$game_address" "$blockscout_address" 2 "$tx_hash"
 
     return 0
   else
