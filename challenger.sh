@@ -241,7 +241,7 @@ wait_for_game_transactions() {
       # Convert game address to lowercase for case-insensitive comparison
       local game_address_lower=$(echo "$game_address" | tr '[:upper:]' '[:lower:]')
 
-      local tx_hashes_in_block=$(echo "$block_txs" | jq -r '.transactions[]?' 2>/dev/null)
+      local tx_hashes_in_block=$(echo "$block_txs" | jq -r '.transactions[]?.hash' 2>/dev/null)
 
       while IFS= read -r tx_hash; do
         if [ -n "$tx_hash" ] && [ "$tx_hash" != "null" ]; then
